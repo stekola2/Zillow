@@ -160,22 +160,21 @@ param <- list(
 )
 
 # train a simple model
-# this function should be levergaed for hyperparameter optimization (gridExtra)
+
 
 xgb_mod <- xgb.train(data=dtrain,
                      params=param,
                      nrounds = 2500,
                      print_every_n = 5)
 
-# view the model results
-# feature importance view
+
 importance_matrix <-xgb.importance(feature_names,model=xgb_mod)
 xgb.plot.importance(importance_matrix)
 
 #predict using the test dataset
 preds <- predict(xgb_mod,dtest)
 
-#xgb_mod$params$eval_metric
+
 
 results <- data.table(parcelid=prop$parcelid,
                       '201610'=preds,
